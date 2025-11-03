@@ -1,21 +1,56 @@
-import prisma from "@/lib/db";
+//Ai Providers
+import { createGoogleGenerativeAI } from "@ai-sdk/google";
+import { createOpenAI } from "@ai-sdk/openai";
+import { createPerplexity } from "@ai-sdk/perplexity";
+
+import { generateText } from "ai";
 import { inngest } from "./client";
 
-export const helloWorld = inngest.createFunction(
-  { id: "hello-world" },
-  { event: "test/hello.world" },
+const google = createGoogleGenerativeAI();
+const openai = createOpenAI();
+const perplexity = createPerplexity();
+
+export const execute = inngest.createFunction(
+  { id: "execute-ai" },
+  { event: "execute/ai" },
   async ({ event, step }) => {
-    await step.sleep("fetching", "6s");
-    await step.sleep("transcribing", "6s");
+    const { steps: geminiSteps } = await step.ai.wrap(
+      "gemini-generate-text",
+      generateText,
+      {
+        model: google("gemini-2.5-flash"),
+        system: "You are a helpful assistant.",
+        prompt:
+          "give me info about this https://www.linkedin.com/in/yash-mevada-433a0b215/.",
+      }
+    );
 
-    await step.run("create-workflow", () => {
-      return prisma.workflow.create({
-        data: {
-          name: "workflow-from-inngest",
-        },
-      });
-    });
+    const { steps: openaiSteps } = await step.ai.wrap(
+      "openai-generate-text",
+      generateText,
+      {
+        model: openai("gpt-4"),
+        system: "You are a helpful assistant.",
+        prompt:
+          "give me info about this https://www.linkedin.com/in/yash-mevada-433a0b215/.",
+      }
+    );
 
-    return { message: `Hello ${event.data.email}!` };
+    const { steps: perplexitySteps } = await step.ai.wrap(
+      "perplexity-generate-text",
+      generateText,
+      {
+        model: perplexity("sonar"),
+        system: "You are a helpful assistant.",
+        prompt:
+          "give me info about this https://www.linkedin.com/in/yash-mevada-433a0b215/.",
+      }
+    );
+
+    return {
+      geminiSteps,
+      openaiSteps,
+      perplexitySteps,
+    };
   }
 );
