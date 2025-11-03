@@ -22,6 +22,11 @@ export const execute = inngest.createFunction(
         system: "You are a helpful assistant.",
         prompt:
           "give me info about this https://www.linkedin.com/in/yash-mevada-433a0b215/.",
+        experimental_telemetry: {
+          isEnabled: true,
+          recordInputs: true,
+          recordOutputs: true,
+        },
       }
     );
 
@@ -33,6 +38,11 @@ export const execute = inngest.createFunction(
         system: "You are a helpful assistant.",
         prompt:
           "give me info about this https://www.linkedin.com/in/yash-mevada-433a0b215/.",
+        experimental_telemetry: {
+          isEnabled: true,
+          recordInputs: true,
+          recordOutputs: true,
+        },
       }
     );
 
@@ -44,6 +54,11 @@ export const execute = inngest.createFunction(
         system: "You are a helpful assistant.",
         prompt:
           "give me info about this https://www.linkedin.com/in/yash-mevada-433a0b215/.",
+        experimental_telemetry: {
+          isEnabled: true,
+          recordInputs: true,
+          recordOutputs: true,
+        },
       }
     );
 
