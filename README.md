@@ -8,3 +8,5 @@ for refer code rabbit digram
 
 find wtf this
 http://localhost:3001/register?\_rsc=970e3
+
+queryClient.invalidateQueries = is used to refetch the data
