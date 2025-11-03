@@ -81,6 +81,12 @@ export function LoginForm() {
                     type="button"
                     disabled={isPending}
                   >
+                    <Image
+                      src="/github.svg"
+                      alt="github"
+                      width={20}
+                      height={20}
+                    />
                     Continue with github
                   </Button>
                   <Button
@@ -89,6 +95,12 @@ export function LoginForm() {
                     type="button"
                     disabled={isPending}
                   >
+                    <Image
+                      src="/google.svg"
+                      alt="google"
+                      width={20}
+                      height={20}
+                    />
                     Continue with google
                   </Button>
                 </div>
