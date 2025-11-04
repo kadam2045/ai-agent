@@ -9,7 +9,12 @@ export const AuthLayout = ({ children }: { children: React.ReactNode }) => {
           href={"/"}
           className="flex items-center gap-2 self-center font-medium"
         />
-        <Image src="/testlogo.png" alt="logo" width={30} height={30} />
+        <Image
+          src="/workflows-svgrepo-com.svg"
+          alt="logo"
+          width={30}
+          height={30}
+        />
         Workflow
         {children}
       </div>
